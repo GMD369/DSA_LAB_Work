@@ -1,0 +1,16 @@
+# Load Fitbit data
+fitbit_df = pd.read_csv('fitbit_fitness_tracker_data.csv')
+
+# Line chart for total steps per day
+fitbit_df['ActivityDate'] = pd.to_datetime(fitbit_df['ActivityDate'])
+daily_steps = fitbit_df.groupby('ActivityDate')['TotalSteps'].sum()
+
+# Plotting the line chart
+plt.figure(figsize=(10,6))
+plt.plot(daily_steps.index, daily_steps.values, marker='o', color='b')
+plt.title('Total Steps on Daily Basis')
+plt.xlabel('Date')
+plt.ylabel('Total Steps')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
